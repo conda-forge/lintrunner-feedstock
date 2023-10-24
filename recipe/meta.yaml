@@ -25,6 +25,7 @@ requirements:
     - {{ compiler('rust') }}
     - {{ compiler('c') }}
     - cross-python_{{ target_platform }}  # [build_platform != target_platform]
+    - python >=3.6                        # [build_platform != target_platform]
     - cargo-bundle-licenses
   host:
     - python >=3.6
