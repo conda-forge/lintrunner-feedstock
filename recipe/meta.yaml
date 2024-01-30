@@ -17,7 +17,7 @@ build:
   # This is a package on PyPI, that builds only an executable
   # and no python extension
   ignore_run_exports_from:
-    - python
+    - python *
     - cross-python_{{ target_platform }}  # [build_platform != target_platform]
 
 requirements:
