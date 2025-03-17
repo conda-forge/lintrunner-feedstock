@@ -14,6 +14,7 @@ build:
     - {{ PYTHON }} -m pip install . -vv
     - cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
   number: 1
+  skip: true  # [not is_python_min]
   # This is a package on PyPI, that builds only an executable
   # and no python extension
   ignore_run_exports_from:
@@ -24,6 +25,7 @@ requirements:
   build:
     - {{ compiler('rust') }}
     - {{ compiler('c') }}
+    - {{ stdlib('c') }}
     - cross-python_{{ target_platform }}  # [build_platform != target_platform]
     - python {{ python_min }}.*           # [build_platform != target_platform]
     - cargo-bundle-licenses
