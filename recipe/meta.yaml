@@ -1,13 +1,13 @@
 {% set name = "lintrunner" %}
-{% set version = "0.11.0" %}
+{% set version = "0.12.7" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/lintrunner-{{ version }}.tar.gz
-  sha256: 21dbdfb4d5f59fe2554598d091cae78b81737e5ae27d7d12ac59d9a09bd0fe97
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/lintrunner-{{ version }}.tar.gz
+  sha256: e4c8fdb0b28ed24758543d20ece9918f7c8094b311e86ad9e882841fed7a36c9
 
 build:
   script:
@@ -24,6 +24,7 @@ requirements:
   build:
     - {{ compiler('rust') }}
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - cross-python_{{ target_platform }}  # [build_platform != target_platform]
     - cargo-bundle-licenses
   host:
