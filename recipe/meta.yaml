@@ -1,5 +1,5 @@
 {% set name = "lintrunner" %}
-{% set version = "0.11.0" %}
+{% set version = "0.12.7" %}
 
 package:
   name: {{ name|lower }}
@@ -7,13 +7,13 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/lintrunner-{{ version }}.tar.gz
-  sha256: 21dbdfb4d5f59fe2554598d091cae78b81737e5ae27d7d12ac59d9a09bd0fe97
+  sha256: e4c8fdb0b28ed24758543d20ece9918f7c8094b311e86ad9e882841fed7a36c9
 
 build:
   script:
     - {{ PYTHON }} -m pip install . -vv
     - cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
-  number: 1
+  number: 0
   skip: true  # [not is_python_min]
   # This is a package on PyPI, that builds only an executable
   # and no python extension
