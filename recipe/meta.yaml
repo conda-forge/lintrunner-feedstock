@@ -6,14 +6,15 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/lintrunner-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/lintrunner-{{ version }}.tar.gz
   sha256: 21dbdfb4d5f59fe2554598d091cae78b81737e5ae27d7d12ac59d9a09bd0fe97
 
 build:
   script:
     - {{ PYTHON }} -m pip install . -vv
     - cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
-  number: 0
+  number: 1
+  skip: true  # [not is_python_min]
   # This is a package on PyPI, that builds only an executable
   # and no python extension
   ignore_run_exports_from:
@@ -24,10 +25,12 @@ requirements:
   build:
     - {{ compiler('rust') }}
     - {{ compiler('c') }}
+    - {{ stdlib('c') }}
     - cross-python_{{ target_platform }}  # [build_platform != target_platform]
+    - python {{ python_min }}.*           # [build_platform != target_platform]
     - cargo-bundle-licenses
   host:
-    - python >=3.6
+    - python {{ python_min }}.*
     - maturin >=0.12,<0.13
     - pip
 
