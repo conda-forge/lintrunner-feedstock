@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/lintrunner-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/lintrunner-{{ version }}.tar.gz
   sha256: 21dbdfb4d5f59fe2554598d091cae78b81737e5ae27d7d12ac59d9a09bd0fe97
 
 build:
