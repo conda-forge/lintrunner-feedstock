@@ -13,7 +13,7 @@ build:
   script:
     - {{ PYTHON }} -m pip install . -vv
     - cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
-  number: 0
+  number: 1
   skip: true  # [not is_python_min]
   # This is a package on PyPI, that builds only an executable
   # and no python extension
