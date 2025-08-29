@@ -11,7 +11,7 @@ source:
 
 build:
   script:
-    - {{ PYTHON }} -m pip install . -vv
+    - pip install . -vv
     - cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
   number: 1
   # This is a package on PyPI, that builds only an executable
