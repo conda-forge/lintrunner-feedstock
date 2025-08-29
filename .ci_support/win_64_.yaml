@@ -4,16 +4,10 @@ c_stdlib:
 - vs
 channel_sources:
 - conda-forge
+- conda-forge,conda-forge/label/python_rc
 channel_targets:
 - conda-forge main
-is_python_min:
-- true
-python_min:
-- '3.10'
 rust_compiler:
 - rust
 target_platform:
 - win-64
-zip_keys:
-- - is_python_min
-  - channel_sources
