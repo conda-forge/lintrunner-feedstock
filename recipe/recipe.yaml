@@ -49,10 +49,12 @@ requirements:
           - cross-python_${{ target_platform }}
 
 tests:
-  - python:
-      imports: lintrunner
-  - script:
+  - requirements:
+      run:
+        - pip
+    script:
       - lintrunner --version
+      - pip check
 
 about:
   summary: A lint running tool and framework.
