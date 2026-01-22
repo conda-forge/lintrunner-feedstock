@@ -4,6 +4,8 @@ schema_version: 1
 context:
   version: "0.12.11"
   python_check_max: "3.14"
+  maturin_min: "1.0"
+  maturin_max: "2.0"
 
 package:
   name: lintrunner
@@ -32,9 +34,10 @@ requirements:
     - if: build_platform != target_platform
       then:
         - cross-python_${{ target_platform }}
+        - maturin >=${{ maturin_min }},<${{ maturin_max }}
         - python ${{ python_min }}.*
   host:
-    - maturin >=1.0,<2.0
+    - maturin >=${{ maturin_min }},<${{ maturin_max }}
     - pip
     - python ${{ python_min }}.*
   # nothing else required at runtime, can ignore linter hint:
