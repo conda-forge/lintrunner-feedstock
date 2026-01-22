@@ -40,8 +40,10 @@ requirements:
     - maturin >=${{ maturin_min }},<${{ maturin_max }}
     - pip
     - python ${{ python_min }}.*
-  run:
-    - python >=${{ python_min }}
+  # nothing else required at runtime, can ignore linter hint:
+  #   If python is a host requirement, it should be a run requirement.
+  # run:
+  # - python >=${{ python_min }}
   ignore_run_exports:
     from_package:
       - python
