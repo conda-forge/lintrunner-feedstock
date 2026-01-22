@@ -33,10 +33,10 @@ requirements:
     - if: build_platform != target_platform
       then:
         - cross-python_${{ target_platform }}
+        - maturin >=${{ maturin_min }},<${{ maturin_max }}
         - python ${{ python_min }}.*
-        - maturin >=${{ maturin_min }},<{{ maturin_max }}
   host:
-    - maturin >=${{ maturin_min }},<{{ maturin_max }}
+    - maturin >=${{ maturin_min }},<${{ maturin_max }}
     - pip
     - python ${{ python_min }}.*
   run:
@@ -49,6 +49,8 @@ requirements:
           - cross-python_${{ target_platform }}
 
 tests:
+  - python:
+      imports: lintrunner
   - script:
       - lintrunner --version
 
