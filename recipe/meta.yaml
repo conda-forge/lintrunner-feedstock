@@ -1,5 +1,5 @@
 {% set name = "lintrunner" %}
-{% set version = "0.12.7" %}
+{% set version = "0.12.11" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/lintrunner-{{ version }}.tar.gz
-  sha256: e4c8fdb0b28ed24758543d20ece9918f7c8094b311e86ad9e882841fed7a36c9
+  sha256: b8b5f3b8b3749b33339bd6909802813cc45cab156342d26a2953eb819fb52ded
 
 build:
   script:
