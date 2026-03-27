@@ -1,0 +1,74 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/prefix-dev/recipe-format/main/schema.json
+schema_version: 1
+
+context:
+  version: "0.12.11"
+  python_check_max: "3.14"
+  maturin_min: "1.0"
+  maturin_max: "2.0"
+
+package:
+  name: lintrunner
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/l/lintrunner/lintrunner-${{ version }}.tar.gz
+  sha256: b8b5f3b8b3749b33339bd6909802813cc45cab156342d26a2953eb819fb52ded
+
+build:
+  number: 0
+  # This is a package on PyPI, that builds only an executable and no python extension
+  skip: not is_python_min
+  python:
+    version_independent: true
+  script:
+    - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
+    - cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
+
+requirements:
+  build:
+    - ${{ compiler("rust") }}
+    - ${{ compiler("c") }}
+    - ${{ stdlib("c") }}
+    - cargo-bundle-licenses
+    - if: build_platform != target_platform
+      then:
+        - cross-python_${{ target_platform }}
+        - maturin >=${{ maturin_min }},<${{ maturin_max }}
+        - python ${{ python_min }}.*
+  host:
+    - maturin >=${{ maturin_min }},<${{ maturin_max }}
+    - pip
+    - python ${{ python_min }}.*
+  # nothing else required at runtime, can ignore linter hint:
+  #   If python is a host requirement, it should be a run requirement.
+  # run:
+  # - python >=${{ python_min }}
+  ignore_run_exports:
+    from_package:
+      - python
+      - if: build_platform != target_platform
+        then:
+          - cross-python_${{ target_platform }}
+
+tests:
+  - requirements:
+      run:
+        - pip
+    script:
+      - lintrunner --version
+      - pip check
+
+about:
+  summary: A lint running tool and framework.
+  license: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  homepage: https://pypi.org/project/lintrunner
+  repository: https://github.com/suo/lintrunner
+
+extra:
+  recipe-maintainers:
+    - isuruf
+    - bollwyvl
